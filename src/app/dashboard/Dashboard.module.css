@@ -1,0 +1,139 @@
+/* Remove top and left from .box */
+.box {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+
+.box.active { 
+  opacity: 1;
+  border-color: transparent;
+}
+
+.box.inactive {
+  opacity: 0.3;
+}
+
+
+.box label {
+  position: absolute;
+  color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.srg {
+  color: violet;
+}
+
+.bph {
+  color: purple;
+}
+
+.gtw {
+  color: fuchsia;
+}
+
+#clock {
+  color: #a31d1d;
+
+  font-family: "Handjet", cursive;
+  text-shadow: 0 0 1px rgba(0, 0, 0, 0.8);
+
+  background-color: #003049;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0.5em solid #003049;
+  border-radius: 1em;
+
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.3),
+    0 0 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.3),
+    inset 0 0 5px rgba(154, 203, 208, 0.5),
+    inset 0 0 10px rgba(154, 203, 208, 0.3);
+  overflow: hidden;
+  animation: colorChange 5s infinite;
+}
+
+@keyframes colorChange {
+  0% {
+    color: rgb(255, 0, 0);
+  }
+  14% {
+    color: rgb(255, 165, 0);
+  }
+  28% {
+    color: rgb(255, 255, 0);
+  }
+  42% {
+    color: rgb(0, 255, 0);
+  }
+  57% {
+    color: rgb(0, 255, 255);
+  }
+  71% {
+    color: rgb(0, 0, 255);
+  }
+  85% {
+    color: rgb(238, 130, 238);
+  }
+  100% {
+    color: rgb(255, 0, 0);
+  }
+}
+
+#date,
+#time,
+#day {
+  margin: 0 auto;
+}
+
+#date {
+  font-size: 2em;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+}
+#time {
+  font-size: 4em;
+  letter-spacing: 0.1em;
+  font-weight: 400;
+}
+#day {
+  font-size: 2em;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+}
+
+@media (max-width: 900px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  body {
+    font-size: 0.7rem;
+  }
+  #date {
+    font-size: 1.7em;
+  }
+  #time {
+    font-size: 3.5em;
+  }
+  #day {
+    font-size: 1.6em;
+  }
+}

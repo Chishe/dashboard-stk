@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: 'Helvetica Bold Oblique';
+  src: url('/fonts/helvetica-bold-oblique.woff2') format('woff2');
+  font-weight: bold;
+  font-style: oblique;
+}
 
 :root {
   --background: #ffffff;
