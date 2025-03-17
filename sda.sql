@@ -1,0 +1,25 @@
+CREATE TABLE pallet_data (
+    id SERIAL PRIMARY KEY,
+    truc_no VARCHAR(50),
+    customer_no VARCHAR(50),
+    ship_to VARCHAR(50),
+    pallet_part_no VARCHAR(50),
+    pallet_qty INT,
+    pallet_stack INT,
+    rype TEXT,
+    code TEXT,
+    qtypack TEXT,
+    no TEXT,
+    gateway TEXT,
+    dock_code TEXT,
+    order_no TEXT,
+    supplier TEXT,
+    arrive_date DATE,
+    arrive_time TIME,
+    mros_no TEXT,
+    passcode TEXT,
+    conveyance TEXT,
+    store_address TEXT,
+    pds_no TEXT;
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

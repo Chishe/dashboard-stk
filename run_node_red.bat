@@ -1,3 +1,0 @@
-@echo off
-echo Starting Node-RED...
-node-red

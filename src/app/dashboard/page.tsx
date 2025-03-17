@@ -31,16 +31,19 @@ export default function Dashboard() {
   useEffect(() => {
     if (data) {
       let { stations } = data;
-  
-      stations = stations.map((val) => (val === "Invalid range" ? 0 : Number(val)));
-  
+
+      stations = stations.map((val) =>
+        val === "Invalid range" ? 0 : Number(val)
+      );
+
       const labelMap = {
         0: null,
-        1: "SRG",
-        2: "BPH",
-        3: "GTW",
+        1: "GTW(G2)",
+        2: "SRG",
+        3: "GTW(C2)",
+        4: "BPH",
       };
-  
+
       for (let i = 0; i < stations.length; i++) {
         updateBox(i, labelMap[stations[i]] || null);
       }
@@ -68,7 +71,6 @@ export default function Dashboard() {
       position: relative;
       transition: transform 0.3s ease-in-out;
     `;
-
     const labelElement = document.createElement("span");
     labelElement.textContent = label;
     labelElement.classList.add(styles.label);
@@ -76,58 +78,83 @@ export default function Dashboard() {
     labelElement.style.position = "absolute";
     labelElement.style.fontSize = "1.5rem";
     labelElement.style.fontWeight = "bold";
-    labelElement.style.color = label === "SRG" ? "red" : label === "BPH" ? "green" : "yellow";
+    labelElement.style.color =
+      label === "GTW(G2)"
+        ? "red"
+        : label === "SRG"
+        ? "green"
+        : label === "GTW(C2)"
+        ? "orange"
+        : label === "BPH"
+        ? "yellow"
+        : "black";
     labelElement.style.backgroundColor = "#040720";
     labelElement.style.textAlign = "center";
 
-    if (index === 5) {
+    if ((label === "GTW(G2)" || label === "GTW(C2)") && index !== 5) {
+      labelElement.style.top = "40%";
+      labelElement.style.left = "4%";
+      labelElement.style.padding = "25px 10px 25px 10px";
+      labelElement.style.clipPath =
+        "polygon(0% 7%, 100% 25%, 100% 100%, 0% 80%)";
+    } else if ((label === "SRG" || label === "BPH") &&index === 5) {
       labelElement.style.top = "32%";
       labelElement.style.left = "37%";
       labelElement.style.padding = "40px 35px 40px 35px";
-      labelElement.style.clipPath = "polygon(0% 28%, 100% 10%, 100% 70%, 0% 87%)";
+      labelElement.style.clipPath =
+        "polygon(0% 28%, 100% 10%, 100% 70%, 0% 87%)";
+    } else if ((label === "GTW(G2)" || label === "GTW(C2)") && index === 5) {
+      labelElement.style.top = "32%";
+      labelElement.style.left = "37%";
+      labelElement.style.padding = "40px 10px 40px 10px";
+      labelElement.style.clipPath =
+        "polygon(0% 28%, 100% 10%, 100% 70%, 0% 87%)";
     } else {
       labelElement.style.top = "40%";
       labelElement.style.left = "4.7%";
       labelElement.style.padding = "30px 35px 20px 35px";
-      labelElement.style.clipPath = "polygon(0% 7%, 100% 25%, 100% 100%, 0% 80%)";
+      labelElement.style.clipPath =
+        "polygon(0% 7%, 100% 25%, 100% 100%, 0% 80%)";
     }
 
     square.appendChild(labelElement);
     box.appendChild(square);
   }
-
   return (
-    <div className="relative flex h-[92vh]">
+    <div className="relative flex h-[100vh]">
       <BackgroundComponent />
 
       <div className="w-full sm:w-1/6 p-4 bg-gradient-to-b from-indigo-400 to-indigo-200 shadow-lg z-50">
         <div className="text-center bg-indigo-200 p-6 rounded-lg shadow-md mb-6">
           <Clock />
         </div>
-
-        <div className="bg-indigo-200 p-6 rounded-lg shadow-md">
+        <div className="bg-indigo-200 p-4 rounded-lg shadow-md">
           <div className="text-center mb-4">
-            <div className="text-xl font-bold text-indigo-950">
+            <div className="text-2xl font-bold text-indigo-950">
               ข้อมูลจำนวนวันนี้
             </div>
           </div>
           <div className="grid grid-cols-1 gap-6">
             <div className="mt-8 grid grid-cols-1 gap-4">
-              {["SRG", "BPH", "GTW"].map((id, index) => (
+              {["GTW(G2)", "SRG", "GTW(C2)", "BPH"].map((id, index) => (
                 <div
                   key={index}
                   id={id}
                   className={`p-6 text-center border rounded-lg shadow-lg text-white font-bold text-2xl flex items-center justify-center ${
                     id === "SRG"
-                      ? "bg-red-500"
+                      ? "bg-gradient-to-b from-red-950 to-red-500"
                       : id === "BPH"
-                      ? "bg-green-500"
-                      : "bg-yellow-500"
+                      ? "bg-gradient-to-b from-green-950 to-green-500"
+                      : id === "GTW(G2)"
+                      ? "bg-gradient-to-b from-yellow-950 to-yellow-500"
+                      : id === "GTW(C2)"
+                      ? "bg-gradient-to-b from-orange-950 to-orange-500"
+                      : ""
                   }`}
                 >
                   <div>
                     <div className="text-lg">{id} Count</div>
-                    <div id={`${id}-count`} className="text-3xl">
+                    <div id={`${id}-count`} className="text-2xl">
                       {counts[id] || 0}
                     </div>
                   </div>
