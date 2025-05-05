@@ -35,7 +35,7 @@ export default function Dashboard() {
       stations = stations.map((val) =>
         val === "Invalid range" ? 0 : Number(val)
       );
-
+      console.log(stations);
       const labelMap = {
         0: null,
         1: "GTW(G2)",
@@ -97,7 +97,7 @@ export default function Dashboard() {
       labelElement.style.padding = "25px 10px 25px 10px";
       labelElement.style.clipPath =
         "polygon(0% 7%, 100% 25%, 100% 100%, 0% 80%)";
-    } else if ((label === "SRG" || label === "BPH") &&index === 5) {
+    } else if ((label === "SRG" || label === "BPH") && index === 5) {
       labelElement.style.top = "32%";
       labelElement.style.left = "37%";
       labelElement.style.padding = "40px 35px 40px 35px";
