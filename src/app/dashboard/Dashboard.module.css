@@ -110,7 +110,7 @@
   font-weight: 400;
   letter-spacing: 0.3em;
 }
-
+/* 
 @media (max-width: 900px) {
   body {
     font-size: 0.9rem;
@@ -136,4 +136,4 @@
   #day {
     font-size: 1.6em;
   }
-}
+} */

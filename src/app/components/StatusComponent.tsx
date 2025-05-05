@@ -6,7 +6,6 @@ const LampStatusComponent = () => {
   const [statusSuccess, setStatusSuccess] = useState(null);
 
   useEffect(() => {
-    // WebSocket สำหรับ Lamp
     const lampSocket = new WebSocket("ws://127.0.0.1:1880/ws/lamp");
     lampSocket.onmessage = (event) => {
       try {
@@ -20,7 +19,6 @@ const LampStatusComponent = () => {
       }
     };
 
-    // WebSocket สำหรับ Status
     const statusSocket = new WebSocket("ws://127.0.0.1:1880/ws/status");
     statusSocket.onmessage = (event) => {
       try {
@@ -52,7 +50,6 @@ const LampStatusComponent = () => {
         </p>
       </div>
 
-      {/* Status (ขวา) */}
       <p className={`text-2xl font-bold tracking-wide uppercase text-center ${
         statusSuccess ? "text-green-500" : "text-red-500"
       }`}>

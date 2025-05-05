@@ -53,11 +53,7 @@ export default function TimeRangeChart() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetchChartData();
-  }, [timeRange]);
-
-  const fetchChartData = async () => {
+  const fetchChartData = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(
@@ -68,23 +64,18 @@ export default function TimeRangeChart() {
 
       const colorMap: Record<string, { background: string; border: string }> = {
         SRG: {
-          background:
-            "bg-gradient-to-b from-rgba(170, 0, 0, 1) to-rgba(255, 0, 0, 1)",
+          background: "rgba(170, 0, 0, 0.7)",
           border: "rgba(255, 0, 0, 1)",
         },
         BPH: {
-          background:
-            "bg-gradient-to-b from-rgba(0, 85, 0, 1) to-rgba(0, 255, 0, 1)",
+          background: "rgba(0, 85, 0, 0.7)",
           border: "rgba(0, 255, 0, 1)",
         },
         GTW: {
-          background:
-            "bg-gradient-to-b from-rgba(170, 170, 0, 1) to-rgba(255, 255, 0, 1)",
+          background: "rgba(170, 170, 0, 0.7)",
           border: "rgba(255, 255, 0, 1)",
         },
       };
-
-      console.log(data.datasets);
 
       setChartData({
         labels: data.labels,
@@ -102,12 +93,17 @@ export default function TimeRangeChart() {
       });
 
       setError(null);
-    } catch (error) {
+    } catch (err) {
+      console.error(err);
       setError("เกิดข้อผิดพลาดในการโหลดข้อมูล");
     } finally {
       setLoading(false);
     }
-  };
+  }, [timeRange]);
+
+  useEffect(() => {
+    fetchChartData();
+  }, [fetchChartData]);
 
   const memoizedChartData = useMemo(() => chartData, [chartData]);
 

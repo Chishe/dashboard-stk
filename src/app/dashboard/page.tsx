@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Clock from "../components/Clock";
 import BackgroundComponent from "../components/BackgroundComponent";
 import styles from "./Dashboard.module.css";
-
+import '../globals.css';
 export default function Dashboard() {
   const [data, setData] = useState(null);
   const [counts, setCounts] = useState({ SRG: 0, BPH: 0, GTW: 0 });
