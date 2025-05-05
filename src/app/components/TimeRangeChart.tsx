@@ -1,6 +1,6 @@
 "use client";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
-import React, { useState, useEffect, useMemo } from "react";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -31,7 +31,7 @@ type ChartData = {
     borderColor: string[];
     borderWidth: number;
   }[];
-  customers: string[]; // Add customer data here
+  customers: string[];
 };
 
 export default function TimeRangeChart() {
@@ -47,7 +47,7 @@ export default function TimeRangeChart() {
         borderWidth: 2,
       },
     ],
-    customers: [], // Initialize customers array
+    customers: [],
   });
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -156,13 +156,18 @@ export default function TimeRangeChart() {
                 maintainAspectRatio: false,
                 plugins: { legend: { display: true, position: "top" } },
                 scales: {
-                  x: { grid: { display: false } },
+                  x: { 
+                    grid: { display: false },
+                    min: 0,
+                  },
                   y: {
                     grid: { color: "#374151" },
-                    ticks: { beginAtZero: true },
+                    ticks: {
+                    },
                   },
                 },
               }}
+              
             />
           )}
         </div>

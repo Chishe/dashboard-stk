@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 
-const LampComponent = () => {
-  const [isSuccess, setIsSuccess] = useState(null);
+const StatusComponent = () => {
+  const [lampStatus, setLampStatus] = useState<0 | 1 | null>(null);
 
-  useEffect(() => { 
+  useEffect(() => {
     const socket = new WebSocket("ws://127.0.0.1:1880/ws/lamp");
 
     socket.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        const status = Number(data.querySuccess);
-        if (status === 0 || status === 1) {
-          setIsSuccess(status);
+        const lampValue = Number(data.querySuccess);
+        if (lampValue === 0 || lampValue === 1) {
+          setLampStatus(lampValue);
         }
       } catch (error) {
-        console.error("Error parsing message:", error);
+        console.error("Error parsing lamp message:", error);
       }
     };
 
@@ -26,7 +26,7 @@ const LampComponent = () => {
       <div className="flex flex-col items-center">
         <div
           className={`w-20 h-20 rounded-full shadow-lg border-4 ${
-            isSuccess === 1 ? "bg-green-500 border-green-700" : "bg-red-500 border-red-700"
+            lampStatus === 1 ? "bg-green-500 border-green-700" : "bg-red-500 border-red-700"
           }`}
         ></div>
       </div>
@@ -34,4 +34,4 @@ const LampComponent = () => {
   );
 };
 
-export default LampComponent;
+export default StatusComponent;

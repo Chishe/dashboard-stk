@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
 const LampStatusComponent = () => {
-  const [lampStatus, setLampStatus] = useState(null);
+  const [lampStatus, setLampStatus] = useState<0 | 1 | null>(null);
   const [statusMessage, setStatusMessage] = useState("Waiting for Scanner...");
-  const [statusSuccess, setStatusSuccess] = useState(null);
+  const [statusSuccess, setStatusSuccess] = useState<boolean | null>(null);
 
   useEffect(() => {
     const lampSocket = new WebSocket("ws://127.0.0.1:1880/ws/lamp");
@@ -50,9 +50,11 @@ const LampStatusComponent = () => {
         </p>
       </div>
 
-      <p className={`text-2xl font-bold tracking-wide uppercase text-center ${
-        statusSuccess ? "text-green-500" : "text-red-500"
-      }`}>
+      <p
+        className={`text-2xl font-bold tracking-wide uppercase text-center ${
+          statusSuccess ? "text-green-500" : "text-red-500"
+        }`}
+      >
         {statusMessage}
       </p>
     </div>

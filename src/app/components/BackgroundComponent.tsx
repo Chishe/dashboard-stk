@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import BoxContainer from "../components/BoxContainer";
 import StatusComponent from "../components/StatusComponent";
-// import LampComponent from "../components/LampComponent";
+
+
+type CardData = {
+  value: string | number | null | undefined;
+};
 
 export default function BackgroundComponent() {
   const [backgroundImage, setBackgroundImage] = useState("/000.png");
   const [nextImage, setNextImage] = useState("/000.png");
   const [fade, setFade] = useState(false);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<CardData[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +56,7 @@ export default function BackgroundComponent() {
   return (
     <div className="relative w-full h-[vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-900 to-gray-700">
       <div
-        className={`absolute inset-0 transition-opacity duration-2000 ${
-          fade ? "opacity-0" : "opacity-100"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-2000 ${fade ? "opacity-0" : "opacity-100"}`}
         style={{
           backgroundImage: `url('${backgroundImage}')`,
           backgroundSize: "contain",
@@ -64,9 +66,7 @@ export default function BackgroundComponent() {
         }}
       />
       <div
-        className={`absolute inset-0 transition-opacity duration-2000 ${
-          fade ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 transition-opacity duration-2000 ${fade ? "opacity-100" : "opacity-0"}`}
         style={{
           backgroundImage: `url('${nextImage}')`,
           backgroundSize: "contain",
@@ -81,34 +81,24 @@ export default function BackgroundComponent() {
 
         <div className="absolute top-0 left-10 flex space-x-4 overflow-x-auto mt-10 z-10">
           {[...Array(5)].map((_, index) => {
-            const cardData = data[index] || {};
+            const cardData = data[index] || { value: "Loading..." };
             return (
-              <div
-                key={index}
-                className="bg-gradient-to-b from-indigo-950 to-indigo-900 text-white rounded-lg shadow-md mb-4 p-4 z-10 w-1/5"
-              >
+              <div key={index} className="bg-gradient-to-b from-indigo-950 to-indigo-900 text-white rounded-lg shadow-md mb-4 p-4 z-10 w-1/5">
                 <div className="border-b-2 pb-2 mb-2">
-                  <h3 className="text-xl font-semibold">
-                    CURRENT-0{index + 1}
-                  </h3>
+                  <h3 className="text-xl font-semibold">CURRENT-0{index + 1}</h3>
                 </div>
                 <div className="mb-2 text-center text-8xl">
                   <div>
                     <strong>{cardData.value ?? "Loading..."}</strong>
                   </div>
                 </div>
-                <div className="border-t-2 pt-2 mt-2">
-                  {/* <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg w-full">
-                    {cardData.task ?? `TASK${index + 1}`}
-                  </button> */}
-                </div>
+                <div className="border-t-2 pt-2 mt-2"></div>
               </div>
             );
           })}
         </div>
         <StatusComponent />
       </div>
-
     </div>
   );
 }

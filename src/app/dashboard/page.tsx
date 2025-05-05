@@ -1,13 +1,24 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import Clock from "../components/Clock";
 import BackgroundComponent from "../components/BackgroundComponent";
 import styles from "./Dashboard.module.css";
-import '../globals.css';
+import "../globals.css";
+
+type Counts = {
+  SRG: number;
+  BPH: number;
+  GTW: number;
+};
+
+type Data = {
+  stations: (string | number)[];
+  nameCounts: Counts;
+};
+
 export default function Dashboard() {
-  const [data, setData] = useState(null);
-  const [counts, setCounts] = useState({ SRG: 0, BPH: 0, GTW: 0 });
+  const [data, setData] = useState<Data | null>(null);
+  const [counts, setCounts] = useState<Counts>({ SRG: 0, BPH: 0, GTW: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,21 +47,25 @@ export default function Dashboard() {
         val === "Invalid range" ? 0 : Number(val)
       );
       console.log(stations);
+
       const labelMap = {
         0: null,
         1: "GTW(G2)",
         2: "SRG",
         3: "GTW(C2)",
         4: "BPH",
-      };
+      } as const;
 
       for (let i = 0; i < stations.length; i++) {
-        updateBox(i, labelMap[stations[i]] || null);
+        const station = stations[i];
+        if (station in labelMap) {
+          updateBox(i, labelMap[station as keyof typeof labelMap] || null);
+        }
       }
     }
   }, [data]);
 
-  function updateBox(index, label) {
+  function updateBox(index: number, label: string | null) {
     const box = document.querySelector(`.box-${index}`);
     if (!box) return;
 
@@ -120,10 +135,10 @@ export default function Dashboard() {
     square.appendChild(labelElement);
     box.appendChild(square);
   }
+
   return (
     <div className="relative flex h-[100vh]">
       <BackgroundComponent />
-
       <div className="w-full sm:w-1/6 p-4 bg-gradient-to-b from-indigo-400 to-indigo-200 shadow-lg z-50">
         <div className="text-center bg-indigo-200 p-6 rounded-lg shadow-md mb-6">
           <Clock />
@@ -140,8 +155,7 @@ export default function Dashboard() {
                 <div
                   key={index}
                   id={id}
-                  className={`p-6 text-center border rounded-lg shadow-lg text-white font-bold text-2xl flex items-center justify-center ${
-                    id === "SRG"
+                  className={`p-6 text-center border rounded-lg shadow-lg text-white font-bold text-2xl flex items-center justify-center ${id === "SRG"
                       ? "bg-gradient-to-b from-red-950 to-red-500"
                       : id === "BPH"
                       ? "bg-gradient-to-b from-green-950 to-green-500"
@@ -150,12 +164,12 @@ export default function Dashboard() {
                       : id === "GTW(C2)"
                       ? "bg-gradient-to-b from-orange-950 to-orange-500"
                       : ""
-                  }`}
+                    }`}
                 >
                   <div>
                     <div className="text-lg">{id} Count</div>
                     <div id={`${id}-count`} className="text-2xl">
-                      {counts[id] || 0}
+                      {counts[id as keyof Counts] || 0}
                     </div>
                   </div>
                 </div>
