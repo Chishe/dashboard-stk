@@ -1,9 +1,9 @@
-import TimeRangeChart from '../components/TimeRangeChart';
+import PalletTable from '../components/PalletTable';
 
 export default function Home() {
     return (
         <main>  
-            <TimeRangeChart />
+            <PalletTable />
         </main>
     );
 }

@@ -20,6 +20,6 @@ CREATE TABLE pallet_data (
     passcode TEXT,
     conveyance TEXT,
     store_address TEXT,
-    pds_no TEXT;
+    pds_no TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
