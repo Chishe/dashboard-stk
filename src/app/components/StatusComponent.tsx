@@ -38,7 +38,6 @@ const LampStatusComponent = () => {
 
   return (
     <div className="absolute w-auto top-40 left-10 flex flex-row items-center justify-center space-x-12 overflow-x-auto mt-20 p-6 z-10 bg-gradient-to-b from-indigo-950 to-indigo-900 text-white rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 ease-in-out">
-      {/* Lamp (ซ้าย) */}
       <div className="flex flex-col items-center">
         <div
           className={`w-20 h-20 rounded-full shadow-lg border-4 ${

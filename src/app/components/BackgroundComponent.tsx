@@ -81,7 +81,7 @@ export default function BackgroundComponent() {
 
         <div className="absolute top-0 left-10 flex space-x-4 overflow-x-auto mt-10 z-10">
           {[...Array(5)].map((_, index) => {
-            const cardData = data[index] || { value: "Loading..." };
+            const cardData = data[index] || { value: "0" };
             return (
               <div key={index} className="bg-gradient-to-b from-indigo-950 to-indigo-900 text-white rounded-lg shadow-md mb-4 p-4 z-10 w-1/5">
                 <div className="border-b-2 pb-2 mb-2">
@@ -89,7 +89,7 @@ export default function BackgroundComponent() {
                 </div>
                 <div className="mb-2 text-center text-8xl">
                   <div>
-                    <strong>{cardData.value ?? "Loading..."}</strong>
+                    <strong>{cardData.value ?? "0"}</strong>
                   </div>
                 </div>
                 <div className="border-t-2 pt-2 mt-2"></div>
