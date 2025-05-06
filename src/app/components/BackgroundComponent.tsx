@@ -16,7 +16,7 @@ export default function BackgroundComponent() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:1880/api/card");
+        const response = await fetch("http://localhost:1880/api/card");
         const result = await response.json();
         setData(result);
       } catch (error) {
@@ -32,7 +32,7 @@ export default function BackgroundComponent() {
   useEffect(() => {
     const fetchBackground = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:1880/api/get-image");
+        const response = await fetch("http://localhost:1880/api/get-image");
         const data = await response.json();
 
         if (data.imageUrl !== backgroundImage) {

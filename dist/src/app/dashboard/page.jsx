@@ -9,7 +9,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch("http://127.0.0.1:1880/api/modbusdata");
+                const response = await fetch("http://localhost:1880/api/modbusdata");
                 const jsonData = await response.json();
                 if (jsonData) {
                     setData(jsonData);

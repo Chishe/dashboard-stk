@@ -40,6 +40,6 @@
 //       <div className="relative w-full bg-cover bg-center m-4" style={{ background: url('/1.jpg') center no-repeat, backgroundSize: 'cover' }}>
 //         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center z-10">
 //         </div>
-//         <DynamicImage apiUrl="http://127.0.0.1:1880/api/get-image" /></div>
+//         <DynamicImage apiUrl="http://localhost:1880/api/get-image" /></div>
 //   );
 // }
